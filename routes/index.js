@@ -7,8 +7,22 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 router.get('/login', function(req, res, next) {
+
     res.render('login', {});
     // res.json({name:'zhangsan',age:18});
+});
+router.get('/blog', function(req, res, next) {
+    var query = 'SELECT * FROM  blog_list';
+    mysql.query(query,function(err,rows,fields){
+        if(err){
+            console.log(err);
+            return false;
+        }
+        var user = rows;
+        if(user){
+            res.render('blog', {});
+        }
+    });
 });
 router.post('/login', function(req, res, next) {
     var username = req.body.username;

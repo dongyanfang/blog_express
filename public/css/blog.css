@@ -1,0 +1,20 @@
+.header{
+    width:100%;
+    background-color: #fafaf8;
+}
+.header_main{
+    width:1200px;
+    height:141px;
+    margin: 0 auto;
+    background:url("/images/blog_bg2.png") no-repeat ;
+}
+.header img{
+
+    width:100%;
+}
+body{
+    background-color: #fafaf8;
+}
+.news{
+    border-bottom: 1px solid #ddd;
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>lalal</title>
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/blog.css" rel='stylesheet' type='text/css'/>
+    <script src="/js/jquery.min.js"></script>
+</head>
+<body>
+<div class="header col-sm-12 col-md-12">
+    <div class="header_main">
+        <nav class="navbar navbar-default col-sm-6 col-sm-offset-4 col-md-6 col-md-offset-4" role="navigation">
+            <div class="container-fluid">
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">首页</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2">
+    <div class="news">
+        <div class="news-sec">
+            <div class="col-md-11 news-1">
+                <a><h5><%= list[0].title %></h5></a>
+                <h6><%= list[0].time %></h6>
+                <div class="post-body">
+                    <p><%= list[0].content %></p>
+                </div>
+                <div class="news-footer">
+                    <h6 class="post-footer">
+                        分类：<%= list[0].classify %> <!--| 评论：未开放--> | 浏览：<%= list[0].look_num %>| 点赞：<%= list[0].good_num %> |
+                        <a>阅读全文 ></a>
+                    </h6>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <nav>
+                    <ul class="pagination">
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+        <script type="text/template" id="allArticle">
+            <div class="col-md-11 news-1">
+                <a href="/article?ID={{= ID }}"><h5>{{= topic }}</h5></a>
+                <h6>{{= date }}</h6>
+                <div class="post-body">
+                    <p> {{= content.substring(0,200).replace(/<[^>]+>/g,"") }} </p>
+                </div>
+                <div class="news-footer">
+                    <h6 class="post-footer">
+                        分类：{{= classify }} <!--| 评论：未开放--> | 浏览：{{= visitNum }} | 点赞：{{= thumbsUp }} |
+                        <a href="/article?ID={{= ID }}">阅读全文 ></a>
+                    </h6>
+                </div>
+            </div>
+        </script>
+    </div>
+</div>
+</body>
+</html>
