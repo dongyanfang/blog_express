@@ -1,0 +1,12 @@
+.lable{
+    display: inline-block;
+    width:100px;
+}
+.login_main{
+    width:1200px;
+    margin:100px auto;
+    text-align: center;
+}
+.login_main>div{
+    line-height: 40px;
+}
