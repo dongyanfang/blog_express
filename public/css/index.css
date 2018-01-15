@@ -101,9 +101,3 @@ body {
     display: inline-block;
     border-radius: 50%;
 }
-.add_blog .form-group{
-    overflow: auto;
-}
-.add_blog .add_blog_btn{
-    margin-left:20px;
-}

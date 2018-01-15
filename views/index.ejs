@@ -2,10 +2,117 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/main.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/index.css" rel='stylesheet' type='text/css'/>
+    <script src="/js/jquery.min.js"></script>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+  <div class="col-md-2 sidebar">
+    <div class="sidebar_top">
+      <h1><a href="/">Blog<span> Dong</span></a></h1>
+    </div>
+    <div class="top-navigation">
+      <div class="t-menu">菜单</div>
+
+      <div class="t-img">
+        <img src="images/lines.png" alt="" />
+      </div>
+      <div class="clearfix"> </div>
+    </div>
+    <div class="drop-navigation">
+      <div class="top-menu">
+
+        <ul>
+          <li class="/"><a href="/">主页</a></li>
+          <li><a href="/blog">写博客</a></li>
+          <!--<li><a href="/NodeJS">NodeJS</a></li>-->
+          <!--<li><a href="/Environment">环境搭建</a></li>-->
+          <!--<li><a href="/About">关于我</a></li>-->
+          <!--<li><a href="/comment">留言</a></li>-->
+        </ul>
+      </div>
+      <script>
+          $( ".top-navigation" ).click(function() {
+              $( ".drop-navigation" ).slideToggle( 300, function() {
+                  // Animation complete.
+              });
+          });
+      </script>
+
+    </div>
+  </div>
+  <div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2">
+    <div class="news">
+      <div class="news-sec">
+        <div class="news-top" id="getAllArticle">
+          <div class="col-md-11 news-1">
+            <a href="#"><h5>正确使用标签</h5></a>
+            <h6>2016-07-12</h6>
+            <div class="post-body">
+              <p>1. H1在一个网页中最好只使用一次，如对一个网页唯一标题使用。H2、H3、H4标签则可以在一个网页中多次出现，但必要随意添加或添加过度。
+
+                2. dl 中dt最好使用一次，且其中不能嵌套快级元素标签，dd可使用多次，且可使用快级元素标签，以前一直觉得dt中的t是指的text,所以就在其中添加一些p标签且使用多次，切记切记，下次不犯错。
+
+                3. 尽可能少的使用无语义的标签div和span；在语义不明显时，既可以使用div或者p时，尽量用p, 因为p在默认情况下有上下间距，对兼容特殊终端有利。
+
+              </p>
+            </div>
+            <div class="news-footer">
+              <h6 class="post-footer">
+                分类：html+css<!--| 评论：未开放--> | 浏览：11 | 点赞：11 |
+                <a href="/article?ID={{= ID }}">阅读全文 ></a>
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-11 news-1">
+            <a href="#"><h5>正确使用标签</h5></a>
+            <h6>2016-07-12</h6>
+            <div class="post-body">
+              <p>1. H1在一个网页中最好只使用一次，如对一个网页唯一标题使用。H2、H3、H4标签则可以在一个网页中多次出现，但必要随意添加或添加过度。
+
+                2. dl 中dt最好使用一次，且其中不能嵌套快级元素标签，dd可使用多次，且可使用快级元素标签，以前一直觉得dt中的t是指的text,所以就在其中添加一些p标签且使用多次，切记切记，下次不犯错。
+
+                3. 尽可能少的使用无语义的标签div和span；在语义不明显时，既可以使用div或者p时，尽量用p, 因为p在默认情况下有上下间距，对兼容特殊终端有利。
+
+              </p>
+            </div>
+            <div class="news-footer">
+              <h6 class="post-footer">
+                分类：html+css<!--| 评论：未开放--> | 浏览：11 | 点赞：11 |
+                <a href="/article?ID={{= ID }}">阅读全文 ></a>
+              </h6>
+            </div>
+          </div>
+          <div class="col-md-11 news-1">
+            <a href="#"><h5>正确使用标签</h5></a>
+            <h6>2016-07-12</h6>
+            <div class="post-body">
+              <p>1. H1在一个网页中最好只使用一次，如对一个网页唯一标题使用。H2、H3、H4标签则可以在一个网页中多次出现，但必要随意添加或添加过度。
+
+                2. dl 中dt最好使用一次，且其中不能嵌套快级元素标签，dd可使用多次，且可使用快级元素标签，以前一直觉得dt中的t是指的text,所以就在其中添加一些p标签且使用多次，切记切记，下次不犯错。
+
+                3. 尽可能少的使用无语义的标签div和span；在语义不明显时，既可以使用div或者p时，尽量用p, 因为p在默认情况下有上下间距，对兼容特殊终端有利。
+
+              </p>
+            </div>
+            <div class="news-footer">
+              <h6 class="post-footer">
+                分类：html+css<!--| 评论：未开放--> | 浏览：11 | 点赞：11 |
+                <a href="/article?ID={{= ID }}">阅读全文 ></a>
+              </h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <nav>
+            <ul class="pagination">
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="clearfix"> </div>
+    </div>
+  </div>
   </body>
 </html>
