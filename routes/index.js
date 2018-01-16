@@ -8,21 +8,33 @@ var queryString = require('querystring');
 /* GET home page. */
 // 首页
 router.get('/', function(req, res, next) {
-    var current_page =1;
-    var num =9;
+    var current_page = req.query.page||1;
+    var num =10;
+    var start = (current_page-1)*num;
+    var end = current_page*num;
+    var page_num =0;
+    var total_page =0;
+    var list_num='SELECT COUNT(*) AS total_page FROM blog_list';
+    mysql.query(list_num,function(err,rows,fields){
+        total_page = rows[0].total_page;
+        page_num=Math.ceil(total_page/num);
+    });
     if(queryString.parse(url.parse(req.url).query).page){
         current_page = queryString.parse(url.parse(req.url).query).page;
     }
-
-    var query = 'SELECT * FROM  blog_list limit' + (current_page-1)*10+','+current_page*10;
+    var query = 'SELECT * FROM  blog_list limit ' + start +','+end;
     mysql.query(query,function(err,rows,fields){
         if(err){
             console.log(err);
             return false;
         }
         var blog_list=rows;
-
-        res.render('index', { blog_list:blog_list });
+        res.render('index', {
+            currrent_page:current_page,
+            data:blog_list,
+            total_page:total_page,
+            page_num:page_num
+        });
     });
 
     // res.json(req.session.username);

@@ -47,19 +47,19 @@
     <div class="news">
       <div class="news-sec">
         <div class="news-top" id="getAllArticle">
-          <% for( var i=0,max=blog_list.length;i<max;i++) { %>
+          <% for( var i=0,max=data.length;i<max;i++) { %>
             <div class="col-md-11 news-1">
-              <a href="#"><h5><%= blog_list[i].title %></h5></a>
-              <h6><%= blog_list[i].time %></h6>
+              <a href="#"><h5>#<%= i+1 %><%= data[i].title %></h5></a>
+              <h6><%= data[i].time %></h6>
               <div class="post-body">
                 <p>
-                    <%= blog_list[i].content %>
+                    <%= data[i].content %>
                 </p>
               </div>
               <div class="news-footer">
                 <h6 class="post-footer">
-                  分类：<%= blog_list[i].classify %><!--| 评论：未开放--> | 浏览：11 | 点赞：11 |
-                  <a href="/blog_detail?id=<%= blog_list[i].id %>">阅读全文 ></a>
+                  分类：<%= data[i].classify %><!--| 评论：未开放--> | 浏览：11 | 点赞：11 |
+                  <a href="/blog_detail?id=<%= data[i].id %>">阅读全文 ></a>
                 </h6>
               </div>
             </div>
@@ -67,13 +67,36 @@
         </div>
         <div class="col-sm-12">
           <nav>
-            <ul class="pagination">
-            </ul>
+            <% if(page_num>1){ %>
+              <ul class="pagination">
+                <li <% if(currrent_page<=1){ %> class="disabled" <% }%>><a <% if(currrent_page>1){ %> href="/?page=<%= currrent_page<=1?1:currrent_page-1%>" <% }%>>&laquo;</a></li>
+                <% for(var i=1,max=page_num;i<=max;i++){ %>
+                <li <% if(i==currrent_page){ %> class="active" <% }%>><a href="/?page=<%= i%>"><%= i %></a></li>
+               <% } %>
+                <li <% if(currrent_page>=page_num){ %> class="disabled" <% }%>><a <% if(currrent_page<page_num){ %> href="/?page=<%= currrent_page<=page_num?page_num:currrent_page+1%>" <% }%>>&raquo;</a></li>
+              </ul>
+            <% } %>
+
           </nav>
         </div>
       </div>
       <div class="clearfix"> </div>
     </div>
   </div>
+
+  <script src="text/javascript">
+//      var amount = parseInt(current_page);
+//      pagement = Math.ceil(amount / 10);
+//      for(var i = 1; i <pagement+1;i++){
+//          $(".pagination").append("<li><a href='javascript:;'>" + i +"</a></li>");
+//      }
+//      $(".pagination li:first").addClass("active");
+//      $(".pagination li").click(function () {
+//          var page = $(this).index();
+//          $('#getAllArticle').html("");
+//          getPage(page);
+//          $(this).addClass("active").siblings().removeClass("active");
+//      });
+  </script>
   </body>
 </html>
