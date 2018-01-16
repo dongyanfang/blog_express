@@ -49,7 +49,7 @@
         <div class="news-top" id="getAllArticle">
           <% for( var i=0,max=data.length;i<max;i++) { %>
             <div class="col-md-11 news-1">
-              <a href="#"><h5>#<%= i+1 %><%= data[i].title %></h5></a>
+              <a href="#"><h5>#<%= (currrent_page-1)*10+i+1 %><%= data[i].title %></h5></a>
               <h6><%= data[i].time %></h6>
               <div class="post-body">
                 <p>
