@@ -43,36 +43,33 @@
 
     </div>
 </div>
-<div class="add_blog col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2">
-    <form role="form" action="/blog" method="post">
-        <div class="form-group">
-            <label for="name" class="col-sm-1 col-md-1">标题</label>
-            <div class=" col-sm-11 col-md-11">
-                <input type="text" class="form-control" placeholder="标题" name="title">
+<div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2">
+    <div class="news">
+        <div class="news-sec">
+            <div class="news-top">
+                <div class="col-md-12 news-1">
+                    <a href=""><h5><%= blog_detail.title %></h5></a>
+                    <h6><%= blog_detail.time %></h6>
+                    <div class="blog-body">
+                        <div class="blog-content">
+                            <%= blog_detail.content %>
+                        </div>
+                    </div>
+                    <p align="center">如果该文章对你有帮助，请点赞。</p>
+                    <p align="center">
+                        <button type="button" id="thumbsUp" class="btn btn-info btn-lg thumbsUp">点赞</button>
+                    </p>
+                    <div class="news-footer">
+                        <h6 class="post-footer">
+                            分类：<%= blog_detail.classify %> | 评论：未开放 | 浏览：11 | 点赞：11|
+                        </h6>
+                    </div>
+
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <label for="name" class="col-sm-1 col-md-1">内容</label>
-            <div class=" col-sm-11 col-md-11">
-            <textarea class="form-control" rows="3" name="content"></textarea>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="name" class="col-sm-1 col-md-1">分类</label>
-            <div class=" col-sm-11 col-md-11">
-                <select class="form-control" name="classify">
-                    <option>html+css</option>
-                    <option>javascript</option>
-                    <option>angular</option>
-                    <option>ionic</option>
-                    <option>ES6</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group col-md-offset-1">
-            <input type="submit" value="确认" class="btn btn-primary add_blog_btn">
-        </div>
-    </form>
+        <div class="clearfix"> </div>
+    </div>
 </div>
 </body>
 </html>

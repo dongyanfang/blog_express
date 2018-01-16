@@ -2,19 +2,57 @@ var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
 var mysql = require('./../database');
+var url = require('http');
+var url = require('url');
+var queryString = require('querystring');
 /* GET home page. */
+// 首页
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+    var current_page =1;
+    var num =9;
+    if(queryString.parse(url.parse(req.url).query).page){
+        current_page = queryString.parse(url.parse(req.url).query).page;
+    }
+
+    var query = 'SELECT * FROM  blog_list limit' + (current_page-1)*10+','+current_page*10;
+    mysql.query(query,function(err,rows,fields){
+        if(err){
+            console.log(err);
+            return false;
+        }
+        var blog_list=rows;
+
+        res.render('index', { blog_list:blog_list });
+    });
+
+    // res.json(req.session.username);
 });
+// 登录页
 router.get('/login', function(req, res, next) {
     res.render('login', {});
     // res.json({name:'zhangsan',age:18});
 });
+// 博客添加页
 router.get('/blog', function(req, res, next) {
      res.render('blog', {title:'111'});
     // alert();
 });
-//登录
+// 博客详情页
+router.get('/blog_detail', function(req, res, next) {
+    var id = queryString.parse(url.parse(req.url).query).id;
+    var query = 'SELECT * FROM  blog_list WHERE id='+id;
+    mysql.query(query,function(err,rows,fields){
+        if(err){
+            console.log(err);
+            return false;
+        }
+        var blog_details=rows[0];
+       //  console.log(blog_details);
+        res.render('blog_detail', {blog_detail:blog_details});
+    });
+    // alert();
+});
+// 登录
 router.post('/login', function(req, res, next) {
     var username = req.body.username;
     var password = req.body.password;
@@ -37,7 +75,7 @@ router.post('/login', function(req, res, next) {
     // res.render('login');
 });
 
-//添加博客
+// 添加博客
 router.post('/blog', function(req, res, next) {
     var title = req.body.title.toString();
     var content = req.body.content.toString();
