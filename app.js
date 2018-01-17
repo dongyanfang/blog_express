@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
-
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -23,8 +22,17 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// sesssion应用的配置
+app.use(session({
+    secret:'blog',
+    cookie: ('name', 'value', { path: '/', httpOnly: true,secure: false, maxAge:  60000 }),
+    resave:true,
+    saveUninitialized:true
+}));
+
 app.use('/', index);
 app.use('/users', users);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -32,13 +40,7 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-// sesssion应用的配置
-app.use(session({
-    secret:'blog',
-    cookie:{maxAge:100*60*24*30},
-    resave:false,
-    saveUninitialized:true
-}));
+
 
 // error handler
 app.use(function(err, req, res, next) {

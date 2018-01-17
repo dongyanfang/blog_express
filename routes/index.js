@@ -2,9 +2,8 @@ var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
 var mysql = require('./../database');
-var url = require('http');
+var http = require('http');
 var url = require('url');
-var session = require('session');
 var queryString = require('querystring');
 /* GET home page. */
 // 首页
@@ -47,20 +46,25 @@ router.get('/login', function(req, res, next) {
 });
 // 博客添加页
 router.get('/blog', function(req, res, next) {
-    if(req.query.id){
-        var id = queryString.parse(url.parse(req.url).query).id;
-        var query = 'SELECT * FROM  blog_list WHERE id='+id;
-        mysql.query(query,function(err,rows,fields) {
-            if (err) {
-                console.log(err);
-                return false;
-            }
-            var blog_details = rows[0];
-        res.render('blog', {blog_details :blog_details});
-        });
+    if(!req.session.username){
+        res.render('login', {});
     }else{
-        res.render('blog', {blog_details :{title:'',content:''}});
+        if(req.query.id){
+            var id = queryString.parse(url.parse(req.url).query).id;
+            var query = 'SELECT * FROM  blog_list WHERE id='+id;
+            mysql.query(query,function(err,rows,fields) {
+                if (err) {
+                    console.log(err);
+                    return false;
+                }
+                var blog_details = rows[0];
+                res.render('blog', {blog_details :blog_details});
+            });
+        }else{
+            res.render('blog', {blog_details :{title:'',content:''}});
+        }
     }
+
     // alert();
 });
 // 博客详情页
@@ -94,8 +98,10 @@ router.post('/login', function(req, res, next) {
         }
         var user = rows[0];
         if(user){
-            console.log(req.session);
-            res.redirect('/');
+           req.session.username=user.authorName;
+            res.redirect('/blog');
+        }else{
+            
         }
     });
     // res.render('login');
