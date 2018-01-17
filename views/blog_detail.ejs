@@ -55,9 +55,9 @@
                             <%= blog_detail.content %>
                         </div>
                     </div>
-                    <p align="center">如果该文章对你有帮助，请点赞。</p>
+                    <!--<p align="center">如果该文章对你有帮助，请点赞。</p>-->
                     <p align="center">
-                        <button type="button" id="thumbsUp" class="btn btn-info btn-lg thumbsUp">点赞</button>
+                        <a href="/blog?id=<%= parseInt(blog_detail.id) %>" class="btn btn-info btn-lg thumbsUp">编辑</a>
                     </p>
                     <div class="news-footer">
                         <h6 class="post-footer">

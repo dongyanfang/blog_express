@@ -4,6 +4,7 @@ var crypto = require('crypto');
 var mysql = require('./../database');
 var url = require('http');
 var url = require('url');
+var session = require('session');
 var queryString = require('querystring');
 /* GET home page. */
 // 首页
@@ -46,7 +47,20 @@ router.get('/login', function(req, res, next) {
 });
 // 博客添加页
 router.get('/blog', function(req, res, next) {
-     res.render('blog', {title:'111'});
+    if(req.query.id){
+        var id = queryString.parse(url.parse(req.url).query).id;
+        var query = 'SELECT * FROM  blog_list WHERE id='+id;
+        mysql.query(query,function(err,rows,fields) {
+            if (err) {
+                console.log(err);
+                return false;
+            }
+            var blog_details = rows[0];
+        res.render('blog', {blog_details :blog_details});
+        });
+    }else{
+        res.render('blog', {blog_details :{title:'',content:''}});
+    }
     // alert();
 });
 // 博客详情页
@@ -80,7 +94,7 @@ router.post('/login', function(req, res, next) {
         }
         var user = rows[0];
         if(user){
-            //req.session.user = user;
+            console.log(req.session);
             res.redirect('/');
         }
     });
@@ -92,15 +106,26 @@ router.post('/blog', function(req, res, next) {
     var title = req.body.title.toString();
     var content = req.body.content.toString();
     var classify = req.body.classify.toString() || 'html+css';
-
-    var query = 'INSERT blog_list SET title='+ mysql.escape(title)+',content=' +mysql.escape(content)+',classify='+mysql.escape(classify)+',time=now(),authorId=1';
-    mysql.query(query,function(err,rows,fields){
-        if(err){
-            console.log(err);
-            return false;
-        }
+    console.log(req);
+    if(req.query.id){
+        var query = 'UPDATE blog_list SET title='+ mysql.escape(title)+',content=' +mysql.escape(content)+',classify='+mysql.escape(classify)+',time=now(),authorId=1 WHERE id='+ req.query.id;
+        mysql.query(query,function(err,rows,fields){
+            if(err){
+                console.log(err);
+                return false;
+            }
+            res.redirect('/blog_detail?id='+req.query.id);
+        });
+    }else{
+        var query = 'INSERT blog_list SET title='+ mysql.escape(title)+',content=' +mysql.escape(content)+',classify='+mysql.escape(classify)+',time=now(),authorId=1';
+        mysql.query(query,function(err,rows,fields){
+            if(err){
+                console.log(err);
+                return false;
+            }
             res.redirect('/');
-    });
+        });
+    }
     // res.render('login');
 });
 module.exports = router;

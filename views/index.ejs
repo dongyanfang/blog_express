@@ -59,14 +59,14 @@
               <div class="news-footer">
                 <h6 class="post-footer">
                   分类：<%= data[i].classify %><!--| 评论：未开放--> | 浏览：11 | 点赞：11 |
-                  <a href="/blog_detail?id=<%= data[i].id %>">阅读全文 ></a>
+                  <a href="/blog_detail?id=<%= parseInt(data[i].id) %>">阅读全文></a>
                 </h6>
               </div>
             </div>
           <% } %>
         </div>
         <div class="col-sm-12">
-          <nav>
+          <nav align="center">
             <% if(page_num>1){ %>
               <ul class="pagination">
                 <li <% if(currrent_page<=1){ %> class="disabled" <% }%>><a <% if(currrent_page>1){ %> href="/?page=<%= currrent_page<=1?1:currrent_page-1%>" <% }%>>&laquo;</a></li>
@@ -83,20 +83,5 @@
       <div class="clearfix"> </div>
     </div>
   </div>
-
-  <script src="text/javascript">
-//      var amount = parseInt(current_page);
-//      pagement = Math.ceil(amount / 10);
-//      for(var i = 1; i <pagement+1;i++){
-//          $(".pagination").append("<li><a href='javascript:;'>" + i +"</a></li>");
-//      }
-//      $(".pagination li:first").addClass("active");
-//      $(".pagination li").click(function () {
-//          var page = $(this).index();
-//          $('#getAllArticle').html("");
-//          getPage(page);
-//          $(this).addClass("active").siblings().removeClass("active");
-//      });
-  </script>
   </body>
 </html>
