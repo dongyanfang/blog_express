@@ -66,6 +66,10 @@ router.get('/blog', function(req, res, next) {
 
     // alert();
 });
+// 关于我
+router.get('/about', function(req, res, next) {
+    res.render('about');
+});
 // 博客详情页
 router.get('/blog_detail', function(req, res, next) {
     var id = queryString.parse(url.parse(req.url).query).id;

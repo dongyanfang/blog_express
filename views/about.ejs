@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>lalal</title>
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/main.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/blog.css" rel='stylesheet' type='text/css'/>
+
+    <script src="/js/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="col-md-2 sidebar">
+    <div class="sidebar_top">
+        <h1><a href="/">Blog<span> Dong</span></a></h1>
+    </div>
+    <div class="top-navigation">
+        <div class="t-menu">菜单</div>
+
+        <div class="t-img">
+            <img src="images/lines.png" alt="" />
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+    <div class="drop-navigation">
+        <div class="top-menu">
+
+            <ul>
+                <li><a href="/">主页</a></li>
+                <li><a href="/blog">写博客</a></li>
+                <!--<li><a href="/NodeJS">NodeJS</a></li>-->
+                <!--<li><a href="/Environment">环境搭建</a></li>-->
+                <li class="active"><a href="/about">关于我</a></li>
+                <!--<li><a href="/comment">留言</a></li>-->
+            </ul>
+        </div>
+        <script>
+            $( ".top-navigation" ).click(function() {
+                $( ".drop-navigation" ).slideToggle( 300, function() {
+                    // Animation complete.
+                });
+            });
+        </script>
+
+    </div>
+</div>
+<div class="col-sm-10 col-sm-offset-3 col-md-10 col-md-offset-2">
+    <div class="jianli">
+        <img src="/images/0001.jpg">
+        <img src="/images/0002.jpg">
+        <img src="/images/0003.jpg">
+    </div>
+
+</div>
+</body>
+</html>

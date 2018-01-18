@@ -25,7 +25,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // sesssion应用的配置
 app.use(session({
     secret:'blog',
-    cookie: ('name', 'value', { path: '/', httpOnly: true,secure: false, maxAge:  60000 }),
     resave:true,
     saveUninitialized:true
 }));

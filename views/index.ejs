@@ -29,7 +29,7 @@
           <li><a href="/blog">写博客</a></li>
           <!--<li><a href="/NodeJS">NodeJS</a></li>-->
           <!--<li><a href="/Environment">环境搭建</a></li>-->
-          <!--<li><a href="/About">关于我</a></li>-->
+          <li><a href="/about">关于我</a></li>
           <!--<li><a href="/comment">留言</a></li>-->
         </ul>
       </div>
@@ -52,9 +52,7 @@
               <a href="#"><h5>#<%= (currrent_page-1)*10+i+1 %><%= data[i].title %></h5></a>
               <h6><%= data[i].time %></h6>
               <div class="post-body">
-                <p>
-                    <%- data[i].content %>
-                </p>
+                    <%= data[i].content.replace(/<[^>]+>/g,"") %>
               </div>
               <div class="news-footer">
                 <h6 class="post-footer">
