@@ -3,20 +3,31 @@
 <head>
     <title>lalal</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel='stylesheet' href='/css/normalize.css' />
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/main.css" rel='stylesheet' type='text/css'/>
     <link rel='stylesheet' href='/css/login.css' />
 </head>
 <body>
-<form action="/login" method="post">
-    <div class="login_main">
-        <div><span class="lable">用户名：</span><input type="text" name="username"></div>
-        <div><span class="lable">密码：</span><input type="password" name="password"></div>
-        <input type="submit" value="登录">
-    </div>
-</form>
-
-<script>
-
-</script>
+<!--<form action="/login" method="post">-->
+    <!--<div class="login_main">-->
+        <!--<div><span class="lable">用户名：</span><input type="text" name="username"></div>-->
+        <!--<div><span class="lable">密码：</span><input type="password" name="password"></div>-->
+        <!--<input type="submit" value="登录">-->
+    <!--</div>-->
+<!--</form>-->
+<div class="wrapper">
+    <form class="form-signin" action="/login" method="post">
+        <h2 class="form-signin-heading">登录</h2>
+        <input type="text" class="form-control" name="username" placeholder="用户名" required="" autofocus="" />
+        <input type="password" class="form-control" name="password" placeholder="密码" required=""/>
+        <%if(message){ %>
+            <p class="message"><%= message %></p>
+        <% } %>
+        <%if(!message){ %>
+        <p class="message"></p>
+        <% } %>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    </form>
+</div>
 </body>
 </html>

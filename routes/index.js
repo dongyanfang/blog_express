@@ -41,13 +41,12 @@ router.get('/', function(req, res, next) {
 });
 // 登录页
 router.get('/login', function(req, res, next) {
-    res.render('login', {});
-    // res.json({name:'zhangsan',age:18});
+    res.render('login', {message:'',title:'111'});
 });
 // 博客添加页
 router.get('/blog', function(req, res, next) {
     if(!req.session.username){
-        res.render('login', {});
+        res.render('login', {message:'',title:'111'});
     }else{
         if(req.query.id){
             var id = queryString.parse(url.parse(req.url).query).id;
@@ -98,10 +97,10 @@ router.post('/login', function(req, res, next) {
         }
         var user = rows[0];
         if(user){
-           req.session.username=user.authorName;
+            req.session.username=user.authorName;
             res.redirect('/blog');
         }else{
-            
+            res.render('login',{message:'用户名或者密码不正确'});
         }
     });
     // res.render('login');
@@ -110,9 +109,8 @@ router.post('/login', function(req, res, next) {
 // 添加博客
 router.post('/blog', function(req, res, next) {
     var title = req.body.title.toString();
-    var content = req.body.content.toString();
+    var content = req.body.editor.toString();
     var classify = req.body.classify.toString() || 'html+css';
-    console.log(req);
     if(req.query.id){
         var query = 'UPDATE blog_list SET title='+ mysql.escape(title)+',content=' +mysql.escape(content)+',classify='+mysql.escape(classify)+',time=now(),authorId=1 WHERE id='+ req.query.id;
         mysql.query(query,function(err,rows,fields){
@@ -132,6 +130,5 @@ router.post('/blog', function(req, res, next) {
             res.redirect('/');
         });
     }
-    // res.render('login');
 });
 module.exports = router;
