@@ -70,6 +70,15 @@ router.get('/blog', function(req, res, next) {
 router.get('/about', function(req, res, next) {
     res.render('about');
 });
+//博客删除功能
+router.get('/deleteBlog',function(req,res,next){
+    var id = queryString.parse(url.parse(req.url).query).id;
+    var query = 'DELETE FROM  blog_list WHERE id='+mysql.escape(id);
+    mysql.query(query,function(err,rows,field){
+        res.redirect('/');
+    })
+})
+
 // 博客详情页
 router.get('/blog_detail', function(req, res, next) {
     var id = queryString.parse(url.parse(req.url).query).id;
@@ -80,8 +89,17 @@ router.get('/blog_detail', function(req, res, next) {
             return false;
         }
         var blog_details=rows[0];
+        var look_num= blog_details.look_num+1;
+         console.log(look_num);
+         var lookQuery='UPDATE blog_list SET look_num='+mysql.escape(look_num)+' WHERE id='+req.query.id;
+        mysql.query(lookQuery,function(err,rows,fields){
+            if(err){
+                console.log(err);
+                return false;
+            }
+            res.render('blog_detail', {blog_detail:blog_details,username:req.session.username});
+        })
        //  console.log(blog_details);
-        res.render('blog_detail', {blog_detail:blog_details});
     });
     // alert();
 });
@@ -125,7 +143,7 @@ router.post('/blog', function(req, res, next) {
             res.redirect('/blog_detail?id='+req.query.id);
         });
     }else{
-        var query = 'INSERT blog_list SET title='+ mysql.escape(title)+',content=' +mysql.escape(content)+',classify='+mysql.escape(classify)+',time=now(),authorId=1';
+        var query = 'INSERT blog_list SET title='+ mysql.escape(title)+',content=' +mysql.escape(content)+',classify='+mysql.escape(classify)+',look_num=0'+',time=now(),authorId=1';
         mysql.query(query,function(err,rows,fields){
             if(err){
                 console.log(err);

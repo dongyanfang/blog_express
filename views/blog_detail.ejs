@@ -48,7 +48,11 @@
         <div class="news-sec">
             <div class="news-top">
                 <div class="col-md-12 news-1">
-                    <a href=""><h5><%= blog_detail.title %></h5></a>
+                    <a href=""><h5><%= blog_detail.title %>
+                            <%if(username){%>
+                            <a href="/deleteBlog?id=<%= parseInt(blog_detail.id) %>" class="deteleBtn">删除</a>
+                            <%}%>
+                        </h5></a>
                     <h6><%= blog_detail.time %></h6>
                     <div class="blog-body">
                         <div class="blog-content">
@@ -57,11 +61,13 @@
                     </div>
                     <!--<p align="center">如果该文章对你有帮助，请点赞。</p>-->
                     <p align="center">
+                        <%if(username){%>
                         <a href="/blog?id=<%= parseInt(blog_detail.id) %>" class="btn btn-info btn-lg thumbsUp">编辑</a>
+                        <%}%>
                     </p>
                     <div class="news-footer">
                         <h6 class="post-footer">
-                            分类：<%= blog_detail.classify %> | 评论：未开放 | 浏览：11 | 点赞：11|
+                            分类：<%= blog_detail.classify %> | 评论：未开放 | 浏览：<%- blog_detail.look_num %> |
                         </h6>
                     </div>
 
